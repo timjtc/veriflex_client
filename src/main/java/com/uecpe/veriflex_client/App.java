@@ -16,6 +16,7 @@ import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import com.github.eduramiba.webcamcapture.drivers.NativeDriver;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -97,7 +98,7 @@ public class App extends JFrame {
 
 	private Executor executor = Executors.newSingleThreadExecutor();
 
-	private Dimension size = WebcamResolution.QQVGA.getSize();
+	private Dimension size = WebcamResolution.VGA.getSize();
 
 	private List<Webcam> webcams = Webcam.getWebcams();
 	private List<WebcamPanel> panels = new ArrayList<WebcamPanel>();
@@ -111,6 +112,7 @@ public class App extends JFrame {
 		super("Test Snap Different Size");
 
 		for (Webcam webcam : webcams) {
+			// webcam.setDriver(new NativeDriver());
 			webcam.setViewSize(size);
 			WebcamPanel panel = new WebcamPanel(webcam, size, false);
 			panel.setFPSDisplayed(true);
@@ -140,6 +142,7 @@ public class App extends JFrame {
 	}
 
 	public static void main(String[] args) {
+		Webcam.setDriver(new NativeDriver());
 		new App();
 	}
 }
