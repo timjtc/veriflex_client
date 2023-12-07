@@ -155,22 +155,22 @@ public class JFrame_MainForm extends JFrame {
 		// // start application with disable snapshot button - we enable it when
 		// // webcam is started
 
-		// btSnapMe.setEnabled(false);
-		// btStop.setEnabled(false);
+		btSnapMe.setEnabled(false);
+		btStop.setEnabled(false);
 
-		// setLayout(new FlowLayout());
+		setLayout(new FlowLayout());
 
-		// for (WebcamPanel panel : panels) {
-		// 	add(panel);
-		// }
+		for (WebcamPanel panel : panels) {
+			add(panel);
+		}
 
-		// add(btSnapMe);
-		// add(btStart);
-		// add(btStop);
+		add(btSnapMe);
+		add(btStart);
+		add(btStop);
 
-		// pack();
-		// setVisible(true);
-		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		pack();
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
     /**
