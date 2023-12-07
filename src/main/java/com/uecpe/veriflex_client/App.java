@@ -102,7 +102,7 @@ public class App extends JFrame {
 
 	private Executor executor = Executors.newSingleThreadExecutor();
 
-	private Dimension size = WebcamResolution.VGA.getSize();
+	private Dimension size = WebcamResolution.QQVGA.getSize();
 
 	private List<Webcam> webcams = Webcam.getWebcams();
 	private List<WebcamPanel> panels = new ArrayList<WebcamPanel>();
@@ -115,8 +115,10 @@ public class App extends JFrame {
 
 		super("Camera API test");
 
+		// Webcam.setDriver(new NativeDriver());
+		// webcams = Webcam.getWebcams();
+
 		for (Webcam webcam : webcams) {
-			// webcam.setDriver(new NativeDriver());
 			webcam.setViewSize(size);
 			WebcamPanel panel = new WebcamPanel(webcam, size, false);
 			panel.setFPSDisplayed(true);
