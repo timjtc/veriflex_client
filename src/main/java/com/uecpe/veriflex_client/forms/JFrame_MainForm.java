@@ -110,7 +110,7 @@ public class JFrame_MainForm extends JFrame {
 
 	private Executor executor = Executors.newSingleThreadExecutor();
 
-	private Dimension size = WebcamResolution.VGA.getSize();
+	private Dimension size = WebcamResolution.QQVGA.getSize();
 
 	private List<Webcam> webcams = Webcam.getWebcams();
 	private List<WebcamPanel> panels = new ArrayList<WebcamPanel>();
@@ -139,9 +139,10 @@ public class JFrame_MainForm extends JFrame {
             camera_panel.setVisible(false);
             jPanel1.add(camera_panel);
 			panels.add(camera_panel);
+            camera_panel.start();
         }
 
-        jPanel1.update(getGraphics());
+        // jPanel1.update(getGraphics());
 
 		// for (Webcam webcam : webcams) {
 		// 	webcam.setViewSize(size);
@@ -155,22 +156,22 @@ public class JFrame_MainForm extends JFrame {
 		// // start application with disable snapshot button - we enable it when
 		// // webcam is started
 
-		btSnapMe.setEnabled(false);
-		btStop.setEnabled(false);
+		// btSnapMe.setEnabled(false);
+		// btStop.setEnabled(false);
 
-		setLayout(new FlowLayout());
+		// setLayout(new FlowLayout());
 
-		for (WebcamPanel panel : panels) {
-			add(panel);
-		}
+		// for (WebcamPanel panel : panels) {
+		// 	add(panel);
+		// }
 
-		add(btSnapMe);
-		add(btStart);
-		add(btStop);
+		// add(btSnapMe);
+		// add(btStart);
+		// add(btStop);
 
-		pack();
-		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// pack();
+		// setVisible(true);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
     /**
@@ -239,7 +240,7 @@ public class JFrame_MainForm extends JFrame {
                     panel.setVisible(false);
                 }
             }
-            jPanel1.update(getGraphics());
+            // jPanel1.update(getGraphics());
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
