@@ -1,4 +1,3 @@
-
 package com.uecpe.veriflex_client;
 
 import java.awt.Dimension;
@@ -10,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
@@ -19,15 +20,16 @@ import javax.swing.JFrame;
 import com.github.eduramiba.webcamcapture.drivers.NativeDriver;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamPicker;
 import com.github.sarxos.webcam.WebcamResolution;
 
 
 @SuppressWarnings("serial")
 public class App extends JFrame {
 
-	private class SnapMeAction extends AbstractAction {
+	private class CaptureImage extends AbstractAction {
 
-		public SnapMeAction() {
+		public CaptureImage() {
 			super("Snapshot");
 		}
 
@@ -36,7 +38,9 @@ public class App extends JFrame {
 			try {
 				for (int i = 0; i < webcams.size(); i++) {
 					Webcam webcam = webcams.get(i);
-					File file = new File(String.format("test-%d.jpg", i));
+					LocalDateTime datetime_now = LocalDateTime.now();
+					DateTimeFormatter datetime_format = DateTimeFormatter.ofPattern("yyyyMMdd'T'HHmmss");
+					File file = new File(String.format("test-%s.jpg", datetime_now.format(datetime_format)));
 					ImageIO.write(webcam.getImage(), "JPG", file);
 					System.out.format("Image for %s saved in %s \n", webcam.getName(), file);
 				}
@@ -46,9 +50,9 @@ public class App extends JFrame {
 		}
 	}
 
-	private class StartAction extends AbstractAction implements Runnable {
+	private class InitCamera extends AbstractAction implements Runnable {
 
-		public StartAction() {
+		public InitCamera() {
 			super("Start");
 		}
 
@@ -77,9 +81,9 @@ public class App extends JFrame {
 		}
 	}
 
-	private class StopAction extends AbstractAction {
+	private class CloseCamera extends AbstractAction {
 
-		public StopAction() {
+		public CloseCamera() {
 			super("Stop");
 		}
 
@@ -103,13 +107,13 @@ public class App extends JFrame {
 	private List<Webcam> webcams = Webcam.getWebcams();
 	private List<WebcamPanel> panels = new ArrayList<WebcamPanel>();
 
-	private JButton btSnapMe = new JButton(new SnapMeAction());
-	private JButton btStart = new JButton(new StartAction());
-	private JButton btStop = new JButton(new StopAction());
+	private JButton btSnapMe = new JButton(new CaptureImage());
+	private JButton btStart = new JButton(new InitCamera());
+	private JButton btStop = new JButton(new CloseCamera());
 
 	public App() {
 
-		super("Test Snap Different Size");
+		super("Camera API test");
 
 		for (Webcam webcam : webcams) {
 			// webcam.setDriver(new NativeDriver());
