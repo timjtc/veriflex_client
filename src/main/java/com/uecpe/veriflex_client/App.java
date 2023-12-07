@@ -146,7 +146,7 @@ public class App extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		Webcam.setDriver(new NativeDriver());
+		// Webcam.setDriver(new NativeDriver());
 		new App();
 	}
 }
